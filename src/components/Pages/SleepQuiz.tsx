@@ -353,6 +353,9 @@ const SleepQuiz: React.FC<SleepQuizProps> = ({ onBack }) => {
       setAnswers(newAnswers);
       setSelectedAnswer(null);
 
+      // Scroll to top when moving to next question
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
       } else {
@@ -366,6 +369,9 @@ const SleepQuiz: React.FC<SleepQuizProps> = ({ onBack }) => {
       setCurrentQuestion(currentQuestion - 1);
       setAnswers(answers.slice(0, -1));
       setSelectedAnswer(null);
+      
+      // Scroll to top when moving to previous question
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
