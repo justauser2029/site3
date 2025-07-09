@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Headphones, BookOpen, Brain, Gift, Star, ChevronRight, Calculator, HelpCircle, CheckSquare } from 'lucide-react';
+import { Headphones, BookOpen, Brain, Gift, Star, ChevronRight, Calculator, HelpCircle, CheckSquare, ClipboardList } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import SleepCalculator from './SleepCalculator';
 import HelpCenterScreen from './HelpCenterScreen';
 import QuickTipsScreen from './QuickTipsScreen';
 import ContactScreen from './ContactScreen';
+import SleepQuiz from './SleepQuiz';
 
 const MoreContent: React.FC = () => {
   const [showSleepCalculator, setShowSleepCalculator] = useState(false);
   const [showHelpCenter, setShowHelpCenter] = useState(false);
   const [showQuickTips, setShowQuickTips] = useState(false);
   const [showContact, setShowContact] = useState(false);
+  const [showSleepQuiz, setShowSleepQuiz] = useState(false);
   const { isDark } = useTheme();
 
   const handleOpenSleepCalculator = () => {
@@ -52,6 +54,17 @@ const MoreContent: React.FC = () => {
     setShowContact(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const handleOpenSleepQuiz = () => {
+    setShowSleepQuiz(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleCloseSleepQuiz = () => {
+    setShowSleepQuiz(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   if (showSleepCalculator) {
     return <SleepCalculator onBack={handleCloseSleepCalculator} />;
   }
@@ -67,6 +80,11 @@ const MoreContent: React.FC = () => {
   if (showContact) {
     return <ContactScreen onBack={handleCloseContact} />;
   }
+
+  if (showSleepQuiz) {
+    return <SleepQuiz onBack={handleCloseSleepQuiz} />;
+  }
+
   const bonusContent = [
     {
       id: 'guided-meditation',
@@ -106,6 +124,12 @@ const MoreContent: React.FC = () => {
       description: 'Técnicas para implementar hoje',
       icon: '💡',
       onClick: handleOpenQuickTips
+    },
+    {
+      title: 'Quiz de Diagnóstico do Sono',
+      description: 'Avalie sua qualidade de sono e receba dicas personalizadas',
+      icon: '🧠',
+      onClick: handleOpenSleepQuiz
     }
   ];
 
