@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { Headphones, BookOpen, Brain, Gift, Star, ChevronRight, Calculator, HelpCircle, CheckSquare, Gamepad2 } from 'lucide-react';
+import { Headphones, BookOpen, Brain, Gift, Star, ChevronRight, Calculator, HelpCircle, CheckSquare } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import SleepCalculator from './SleepCalculator';
 import HelpCenterScreen from './HelpCenterScreen';
 import QuickTipsScreen from './QuickTipsScreen';
 import ContactScreen from './ContactScreen';
-import MobileGameInterface from './MobileGameInterface';
 
 const MoreContent: React.FC = () => {
   const [showSleepCalculator, setShowSleepCalculator] = useState(false);
   const [showHelpCenter, setShowHelpCenter] = useState(false);
   const [showQuickTips, setShowQuickTips] = useState(false);
   const [showContact, setShowContact] = useState(false);
-  const [showDreamStory, setShowDreamStory] = useState(false);
   const { isDark } = useTheme();
 
   const handleOpenSleepCalculator = () => {
@@ -54,16 +52,6 @@ const MoreContent: React.FC = () => {
     setShowContact(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const handleOpenDreamStory = () => {
-    setShowDreamStory(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleCloseDreamStory = () => {
-    setShowDreamStory(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
   if (showSleepCalculator) {
     return <SleepCalculator onBack={handleCloseSleepCalculator} />;
   }
@@ -78,10 +66,6 @@ const MoreContent: React.FC = () => {
 
   if (showContact) {
     return <ContactScreen onBack={handleCloseContact} />;
-  }
-
-  if (showDreamStory) {
-    return <MobileGameInterface onBack={handleCloseDreamStory} />;
   }
   const bonusContent = [
     {
@@ -122,12 +106,6 @@ const MoreContent: React.FC = () => {
       description: 'Técnicas para implementar hoje',
       icon: '💡',
       onClick: handleOpenQuickTips
-    },
-    {
-      title: 'Dream Story',
-      description: 'Histórias relaxantes para dormir',
-      icon: <Gamepad2 className="w-6 h-6 text-purple-400" />,
-      onClick: handleOpenDreamStory
     }
   ];
 
